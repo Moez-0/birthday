@@ -7,16 +7,15 @@
     <script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js"></script>
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
 
-
     <script type="module">
         const { animate, scroll } = window.Motion;
 
         // Progress bar animation
         scroll(animate(".progress", { scaleX: [0, 1] }, { ease: "linear" }));
 
-        // Floating lyrics animation
+        // Floating lyrics animation (adjusted movement range)
         document.querySelectorAll(".img-container h2").forEach((header) => {
-            scroll(animate(header, { y: [-400, 400] }, { ease: "linear" }), {
+            scroll(animate(header, { y: [-100, 100] }, { ease: "linear" }), {
                 target: header,
             });
         });
@@ -51,9 +50,8 @@
         .img-container > div {
             width: 90%;
             max-width: 300px;
-            height: auto;
             background: #000;
-            overflow: hidden;
+
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -73,6 +71,7 @@
             text-align: center;
             margin-top: 10px;
             max-width: 90%;
+            position: static; /* Ensuring it stays visible on mobile */
         }
 
         .progress {
@@ -111,7 +110,6 @@
         </audio>
     </section>
     
-
     <section class="img-container">
         <div>
             <img src="1.jpg" />
@@ -182,16 +180,15 @@
         </div>
     </section>
     <section class="img-container">
-        <p
-            style="
+        <p style="
                 color: white;
                 font-size: 1.5rem;
                 font-weight: 700;
                 text-align: center;
                 margin-top: 10px;
                 max-width: 90%;
-            "
-        >Do you think I'd give up<br>
+            ">
+        Do you think I'd give up<br>
         That this might've shook the love from me<br>
         Or that I was on the brink?<br>
         How could you think, darling, I'd scare so easily?<br>
@@ -200,9 +197,8 @@
         My life was a storm, since I was born<br>
         How could I fear any hurricane?<br>
         </p>
-
     </section>
+    
     <div class="progress"></div>
-
 </body>
 </html>
