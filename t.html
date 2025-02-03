@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Year Full of Memories</title>
+    <script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js"></script>
+    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+
+    <script type="module">
+        document.addEventListener("DOMContentLoaded", function () {
+            const { animate, scroll } = window.Motion;
+
+            // Disable scroll snapping at the start
+            document.documentElement.style.scrollSnapType = "none";
+
+            // Scroll to lyrics section on load
+            document.querySelector(".lyrics-page").scrollIntoView({ behavior: "smooth" });
+
+            // Enable scroll snapping **only after lyrics finish**
+            function enableScrolling() {
+                document.documentElement.style.scrollSnapType = "y mandatory";
+            }
+
+            // Typewriter Effect for Lyrics
+            const lyrics = [
+                "You are my sunshine...",
+                "My only sunshine...",
+                "You make me happy...",
+                "When skies are gray...",
+                "You'll never know dear...",
+                "How much I love you..."
+            ];
+
+            let typewriter = new Typewriter("#lyrics", {
+                loop: false,
+                delay: 75,
+                cursor: "|"
+            });
+
+            lyrics.forEach((line) => {
+                typewriter.typeString(line)
+                    .pauseFor(1500)
+                    .callFunction(() => {
+                        document.getElementById("lyrics").innerHTML += "<br>"; // Keep previous lines
+                    });
+            });
+
+            typewriter.callFunction(enableScrolling); // Enable scrolling after lyrics finish
+            typewriter.start();
+
+            // Play background music
+            const audio = document.getElementById("song");
+            audio.play().catch(error => console.log("Autoplay blocked: ", error));
+
+            // Progress bar representing gallery scroll
+            scroll(animate(".progress", { scaleX: [0, 1] }, { ease: "linear" }));
+        });
+    </script>
+
+    <style>
+        :root {
+            --accent: #ff4081;
+        }
+
+        html {
+            scroll-snap-type: y mandatory;
+        }
+
+        body {
+            background-color: #000;
+            margin: 0;
+            padding: 0;
+            font-family: JetBrains Mono, monospace;
+        }
+
+        .lyrics-page {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        #lyrics {
+            font-size: 2rem;
+            font-weight: bold;
+            max-width: 80%;
+            margin-bottom: 20px;
+            white-space: pre-wrap;
+        }
+
+        .img-container {
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .img-container > div {
+            width: 90%;
+            max-width: 300px;
+            height: auto;
+            background: #000;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .img-container img, .img-container video {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: cover;
+        }
+
+        .img-container h2 {
+            color: white;
+            font-size: 8vw;
+            font-weight: 700;
+            letter-spacing: -2px;
+            text-align: center;
+            margin-top: 10px;
+            position: static;
+        }
+
+        .progress {
+            position: fixed;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--accent);
+            bottom: 50px;
+            transform: scaleX(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Lyrics Page -->
+    <section class="lyrics-page">
+        <h1 id="lyrics"></h1>
+        <audio id="song" loop>
+            <source src="song.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+    </section>
+
+    <!-- Image and Video Gallery -->
+    <section class="img-container">
+        <div>
+            <img src="1.jpg" />
+            <h2>#001</h2>
+        </div>
+    </section>
+    <section class="img-container">
+        <div>
+            <img src="2.jpg" />
+            <h2>#002</h2>
+        </div>
+    </section>
+    <section class="img-container">
+        <div>
+            <img src="3.jpg" />
+            <h2>#003</h2>
+        </div>
+    </section>
+    <section class="img-container">
+        <div>
+            <video autoplay muted loop>
+                <source src="4.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <h2>#004</h2>
+        </div>
+    </section>
+
+    <div class="progress"></div>
+
+</body>
+</html>

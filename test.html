@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Year Full of Memories</title>
+    <script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+
+
+    <script type="module">
+        const { animate, scroll } = window.Motion;
+
+        // Progress bar animation
+        scroll(animate(".progress", { scaleX: [0, 1] }, { ease: "linear" }));
+
+        // Floating lyrics animation
+        document.querySelectorAll(".img-container h2").forEach((header) => {
+            scroll(animate(header, { y: [-400, 400] }, { ease: "linear" }), {
+                target: header,
+            });
+        });
+    </script>
+
+    <style>
+        :root {
+            --accent: #ff4081;
+        }
+
+        html {
+            scroll-snap-type: y mandatory;
+        }
+
+        body {
+            background-color: #000;
+            margin: 0;
+            padding: 0;
+            font-family: JetBrains Mono, monospace;
+        }
+
+        .img-container {
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .img-container > div {
+            width: 90%;
+            max-width: 300px;
+            height: auto;
+            background: #000;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .img-container img, .img-container video {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: cover;
+        }
+
+        .img-container h2 {
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-top: 10px;
+            max-width: 90%;
+        }
+
+        .progress {
+            position: fixed;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--accent);
+            bottom: 50px;
+            transform: scaleX(0);
+        }
+
+        @media (min-width: 768px) {
+            .img-container {
+                flex-direction: row;
+            }
+
+            .img-container h2 {
+                position: absolute;
+                top: 50%;
+                left: calc(50% + 120px);
+                transform: translateY(-50%);
+                font-size: 1.8rem;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Lyrics Page -->
+    <section class="lyrics-page">
+        <h1 id="lyrics"></h1>
+        <audio id="song" loop autoplay>
+            <source src="song.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+    </section>
+    
+
+    <section class="img-container">
+        <div>
+            <img src="1.jpg" />
+            <h2>Happy Birthday Ameny</h2>
+        </div>
+    </section>
+    <section class="img-container">
+        <div>
+            <img src="2.jpg" />
+            <h2>Wish It was better time for it</h2>
+        </div>
+    </section>
+    <section class="img-container">
+        <div>
+            <img src="3.jpg" />
+            <h2>You Told me "aasba lih"</h2>
+        </div>
+    </section>
+    <section class="img-container">
+        <div>
+            <video autoplay muted loop>
+                <source src="4.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <h2>But</h2>
+        </div>
+    </section>
+    <section class="img-container">
+        <div>
+            <img src="5.jpg" />
+            <h2>Hopefully this year goes</h2>
+        </div>
+    </section>
+    <section class="img-container">
+        <div>
+            <video autoplay muted loop>
+                <source src="11.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <h2>Better for you</h2>
+        </div>
+    </section>
+    <section class="img-container">
+        <div>
+            <video autoplay muted loop>
+                <source src="7.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <h2>Soul</h2>
+        </div>
+    </section>
+    <section class="img-container">
+        <div>
+            <video autoplay muted loop>
+                <source src="8.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <h2>Ego</h2>
+        </div>
+    </section>
+    <section class="img-container">
+        <div>
+            <video autoplay muted loop>
+                <source src="9.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <h2>Universe</h2>
+        </div>
+    </section>
+    <section class="img-container">
+        <p
+            style="
+                color: white;
+                font-size: 1.5rem;
+                font-weight: 700;
+                text-align: center;
+                margin-top: 10px;
+                max-width: 90%;
+            "
+        >Do you think I'd give up<br>
+        That this might've shook the love from me<br>
+        Or that I was on the brink?<br>
+        How could you think, darling, I'd scare so easily?<br>
+        Now that it's done<br>
+        There's not one thing that I would change<br>
+        My life was a storm, since I was born<br>
+        How could I fear any hurricane?<br>
+        </p>
+
+    </section>
+    <div class="progress"></div>
+
+</body>
+</html>
